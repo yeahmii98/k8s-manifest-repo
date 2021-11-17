@@ -10,6 +10,6 @@ spec:
   selector:
      app: plate-detection
   ports:
-    - port: 8081
+    - port: 80
       targetPort: 8081
       protocol: TCP
