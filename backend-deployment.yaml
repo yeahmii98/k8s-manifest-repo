@@ -17,12 +17,6 @@ spec:
       containers:
         - name: flask-backend
           image: 261331872489.dkr.ecr.ap-southeast-1.amazonaws.com/flask-backend:latest
-          command: ['sh', '-c']
-          args: 
-          - while true; do
-              echo -en '\n';
-              printenv;
-            done;
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
