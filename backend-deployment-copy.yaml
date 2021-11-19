@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: flask-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -23,3 +28,33 @@ spec:
           env:
             - name: PLATE_DETECTION_URL
               value: "http://plate-detection-service.default.svc.cluster.local/"
+            - name: ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-pass-secret
+                  key: ACCOUNT_ID
+            - name: ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-pass-secret
+                  key: ACCESS_KEY
+            - name: BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: aws-pass-secret
+                  key: BUCKET_NAME
+                  
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8080
+          lifecycle:
+            preStop:
+              httpGet:
+                path: /prestop
+                port: 8080
+        terminationGracePeriodSeconds: 30
