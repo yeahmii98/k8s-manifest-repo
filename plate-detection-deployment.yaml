@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: plate-detection
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -19,4 +24,20 @@ spec:
           image: 261331872489.dkr.ecr.ap-southeast-1.amazonaws.com/plate-detection:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
+          env:
+            - name: ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-pass-secret
+                  key: ACCOUNT_ID
+            - name: ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-pass-secret
+                  key: ACCESS_KEY
+            - name: BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: aws-pass-secret
+                  key: BUCKET_NAME
