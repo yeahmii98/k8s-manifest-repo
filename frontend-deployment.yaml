@@ -23,3 +23,5 @@ spec:
           env:
             - name: PLATE_DETECTION_URL
               value: "http://plate-detection-service.default.svc.cluster.local/"
+            - name: POSE_ESTIMATION_URL
+              value: "http://pose-estimation-service.default.svc.cluster.local/"
