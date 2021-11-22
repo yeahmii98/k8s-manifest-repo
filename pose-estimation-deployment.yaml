@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: plate-detection
+  name: pose-estimation
   namespace: default
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: plate-detection
+      app: pose-estimation
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -17,11 +17,11 @@ spec:
   template:
     metadata:
       labels:
-        app: plate-detection
+        app: pose-estimation
     spec:
       containers:
-        - name: plate-detection
-          image: 261331872489.dkr.ecr.ap-southeast-1.amazonaws.com/plate-detection:latest
+        - name: pose-estimation
+          image: 261331872489.dkr.ecr.ap-southeast-1.amazonaws.com/pose-estimation:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
