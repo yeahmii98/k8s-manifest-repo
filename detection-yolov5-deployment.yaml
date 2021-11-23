@@ -24,8 +24,7 @@ spec:
           image: 736604829268.dkr.ecr.ap-northeast-2.amazonaws.com/test:secret-aicore10
           imagePullPolicy: Always
           ports:
-            - containerPort: 8081
-          command: ["python", "main.py"]
+            - containerPort: 8080
           env:
           - name: ACCOUNT_ID
             valueFrom:
