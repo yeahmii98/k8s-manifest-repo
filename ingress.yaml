@@ -1,5 +1,4 @@
----
-apiVersion: networking.k8s.io/v1
+apiVersion: extension/v1beta1
 kind: Ingress
 metadata:
   name: "kakaonibs-ingress"
@@ -10,11 +9,7 @@ metadata:
 spec:
   rules:
     - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: "react-frontend"
-                port:
-                  number: 80
+        paths:     
+           - backend:
+              serviceName: react-frontend
+              servicePort: 80
