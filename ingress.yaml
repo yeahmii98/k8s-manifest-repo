@@ -11,5 +11,5 @@ spec:
     - http:
         paths:     
            - backend:
-              serviceName: react-frontend
+              serviceName: frontend
               servicePort: 80
