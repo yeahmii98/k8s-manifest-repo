@@ -267,7 +267,7 @@ spec:
     sh 'git add *'
     sh 'git commit -m "update"'
     sh "git push https://huhji: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@github.com/huhji/k8s-manifest-repo argocd"   
-    slackSend channel: '#cicd', color: '#FF0000', message: "${JOB_NAME} - #${BUILD_NUMBER} Push to Gitops(Finish!)", teamDomain: 'k8sproject5', tokenCredentialId: 'kakaonibs-slack'
+    slackSend channel: '#cicd', color: '#FF0000', message: "${JOB_NAME} - #${BUILD_NUMBER} Push to Gitops(Finish)", teamDomain: 'k8sproject5', tokenCredentialId: 'kakaonibs-slack'
 }
 
   } catch (error) {
