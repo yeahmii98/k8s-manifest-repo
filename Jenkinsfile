@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat
-
 node {
   try {
     stage('Checkout git') {
@@ -36,7 +34,7 @@ spec:
     spec:
       containers:
         - name: image-classification
-          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/image-classification:${imageTag}
+          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/image-classification:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -83,7 +81,7 @@ spec:
     spec:
       containers:
         - name: react-frontend
-          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/react-frontend:${imageTag}
+          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/react-frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -128,7 +126,7 @@ spec:
     spec:
       containers:
         - name: plate-detection
-          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/plate-detection:${imageTag}
+          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/plate-detection:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -180,7 +178,7 @@ spec:
     spec:
       containers:
         - name: pose-estimation
-          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/pose-estimation:${imageTag}
+          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/pose-estimation:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -233,7 +231,7 @@ spec:
     spec:
       containers:
         - name: yolov5-detection
-          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/yolov5-detection:${imageTag}
+          image: 525348550799.dkr.ecr.ap-southeast-1.amazonaws.com/yolov5-detection:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -259,7 +257,6 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
       terminationGracePeriodSeconds:  30
-
       EOF
       """
       slackSend channel: '#jenkins_noti', color: '#FF0000', message: "${JOB_NAME} - #${BUILD_NUMBER} Push yolov5-detection-deployment.yaml", teamDomain: 'k8sproject5', tokenCredentialId: 'kakaonibs-slack'
@@ -284,4 +281,3 @@ def getLatestBuildNumber() {
     def job = Jenkins.instance.getItemByFullName(jobname)
     job.getLastBuild().getNumber()
 }
-
