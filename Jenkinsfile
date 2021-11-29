@@ -1,8 +1,9 @@
 node {
   try {
     stage('Checkout git') {
-      sh "git pull https://huhji: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@github.com/huhji/k8s-manifest-repo --allow-unrelated-histories"
-      slackSend channel: '#cicd', color: '#FF0000', message: "${JOB_NAME} - #${BUILD_NUMBER} Pull Repository", teamDomain: 'k8sproject5', tokenCredentialId: 'kakaonibs-slack'
+     // sh "git pull https://huhji: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@github.com/huhji/k8s-manifest-repo --allow-unrelated-histories"
+      checkout scm
+         slackSend channel: '#cicd', color: '#FF0000', message: "${JOB_NAME} - #${BUILD_NUMBER} Pull Repository", teamDomain: 'k8sproject5', tokenCredentialId: 'kakaonibs-slack'
     }
 
     def imageTag = getLatestBuildNumber()
